@@ -1,0 +1,326 @@
+
+EN
+
+impersonalForms
+presentIndicative
+pastIndicative
+futureIndicative
+perfectIndicative
+pluperfectIndicative
+futurePerfectIndicative
+presentSubjunctive
+pastSubjunctive
+perfectSubjunctive
+pluperfectSubjunctive
+presentConditional
+perfectConditional
+similarVerbs
+
+
+-templates-
+
+=imp
+=presInd
+=pastInd
+=futInd
+=perfInd
+=pluperfInd
+=futPerfInd
+=presSubj
+=pastSubj
+=perfSubj
+=pluperfSubj
+=presCond
+=perfCond
+
+
+============================================================
+
+DE
+
+impersonalForms
+presentIndicative
+preteritIndicative
+futureIndicative
+perfectIndicative
+pluperfectIndicative
+futurePerfectIndicative
+presentSubjunctive
+preteritSubjunctive
+perfectSubjunctive
+pluperfectSubjunctive
+presentConditional
+perfectConditional
+imperative
+similarVerbs
+
+
+-templates-
+
+=imp
+=presInd
+=pretInd
+=futInd
+=perfInd
+=pluperfInd
+=futPerfInd
+=presSubj
+=pretSubj
+=perfSubj
+=pluperfSubj
+=presCond
+=perfCond
+=imper
+
+
+============================================================
+
+FR
+
+impersonalForms
+presentIndicative
+imperfectIndicative
+futureIndicative
+pastIndicative
+pastComplexIndicative
+pluperfectIndicative
+futurePerfectIndicative
+pastPerfectIndicative
+presentSubjunctive
+imperfectSubjunctive
+pastComplexSubjunctive
+pluperfectSubjunctive
+presentConditional
+pastConditional
+imperative
+similarVerbs
+
+
+Infinitif
+Participe présent
+Participe passé
+
+= Indicatif
+Présent
+Imparfait
+Futur simple
+Passé simple
+Passé composé
+Plus-que-parfait
+Futur antérieur
+Passé antérieur
+
+= Subjonctif
+Présent
+Imparfait
+Passé composé
+Plus-que-parfait
+
+= Conditionnel
+Présent
+Passé
+
+= Impératif
+
+
+-templates-
+
+=imp
+=presInd
+=impInd
+=futInd
+=pastInd
+=pastCompInd
+=pluperfInd
+=futPerfInd
+=pastPerfInd
+=presSubj
+=impSubj
+=pastCompSubj
+=pluperfSubj
+=presCond
+=pastCond
+=imper
+
+
+============================================================
+
+IT
+
+impersonalForms
+
+presentIndicative
+imperfectIndicative
+futureIndicative
+pastRemoteIndicative
+
+pastIndicative
+pluperfectIndicative
+futurePerfectIndicative
+pluperfectRemoteIndicative
+
+presentSubjunctive
+imperfectSubjunctive
+pastSubjunctive
+pluperfectSubjunctive
+
+presentConditional
+pastConditional
+imperative
+similarVerbs
+
+
+---- tenses ----
+
+Infinito
+Participio presente
+Gerundio
+Participio passato
+
+= Indicativo
+Presente
+Imperfetto
+Futuro
+Passato remoto
+Passato prossimo
+Trapassato prossimo
+Futuro anteriore
+Trapassato remoto
+
+= Congiuntivo
+Presente
+Imperfetto
+Passato prossimo
+Trapassato prossimo
+
+= Condizionale
+Presente
+Passato
+
+= Imperativo
+
+
+---- templates ----
+
+=imp
+=presInd
+=impInd
+=futInd
+=pastRemInd
+=pastInd
+=pluperfInd
+=futPerfInd
+=pluperfRemInd
+=presSubj
+=impSubj
+=pastSubj
+=pluperfSubj
+=presCond
+=pastCond
+=imper
+
+
+============================================================
+
+LA
+
+lookupWord
+
+impersonalActive
+
+presentIndicativeActive
+imperfectIndicativeActive
+future1IndicativeActive
+perfectIndicativeActive
+pluperfectIndicativeActive
+future2IndicativeActive
+
+presentConjunctiveActive
+imperfectConjunctiveActive
+perfectConjunctiveActive
+pluperfectConjunctiveActive
+
+
+impersonalPassive
+
+presentIndicativePassive
+imperfectIndicativePassive
+future1IndicativePassive
+perfectIndicativePassive
+pluperfectIndicativePassive
+future2IndicativePassive
+
+presentConjunctivePassive
+imperfectConjunctivePassive
+perfectConjunctivePassive
+pluperfectConjunctivePassive
+
+
+imperativeI
+imperativeII
+similarVerbs
+
+
+---- tenses ----
+
+Infinitive
+Present participle
+Gerund
+Gerundive
+
+Infinitive
+Perfect participle
+
+= Indicative
+Present
+Imperfect
+I Future
+Perfect
+Pluperfect
+II Future
+
+= Conjunctive
+Present
+Imperfect
+Perfect
+Pluperfect
+
+= Imperative
+Imperative I
+Imperative II
+
+
+-templates-
+
+=lookupWord
+
+=impAct
+
+=presIndAct
+=impIndAct
+=fut1IndAct
+=perfIndAct
+=pluperfIndAct
+=fut2IndAct
+
+=presConjAct
+=impConjAct
+=perfConjAct
+=pluperfConjAct
+
+=impPasv
+
+=presIndPasv
+=impIndPasv
+=fut1IndPasv
+=perfIndPasv
+=pluperfIndPasv
+=fut2IndPasv
+
+=presConjPasv
+=impConjPasv
+=perfConjPasv
+=pluperfConjPasv
+
+=imperI
+=imperII
