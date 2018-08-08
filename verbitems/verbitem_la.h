@@ -2,7 +2,7 @@
 #define VERBITEM_LA_H
 
 
-struct VerbItem_LA{
+struct VerbItem_LA {
 
   QString verb;
   
@@ -36,7 +36,7 @@ struct VerbItem_LA{
   QStringList similarVerbs;
   
 
-  void clear(){
+  void clear() {
     verb.clear();
 
     lookupWord.clear();

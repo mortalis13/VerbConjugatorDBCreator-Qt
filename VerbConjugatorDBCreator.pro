@@ -16,8 +16,7 @@ QMAKE_CXXFLAGS += -std=c++11
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp\
-    database.cpp\
+    mainwindow.cpp\
     dbcreators/dbcreator_es.cpp \
     dbcreators/dbcreator_en.cpp \
     dbcreators/dbcreator_de.cpp \
@@ -33,8 +32,6 @@ SOURCES += main.cpp\
     databases/database_la.cpp \
 
 HEADERS  += mainwindow.h\
-database.h \
-    base.h \
     dbcreators/dbcreator_es.h \
     dbcreators/dbcreator_en.h \
     dbcreators/dbcreator_de.h \

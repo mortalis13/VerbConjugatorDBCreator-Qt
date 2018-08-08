@@ -2,7 +2,7 @@
 #define VERBITEM_IT_H
 
 
-struct VerbItem_IT{
+struct VerbItem_IT {
 
   QString verb;
   
@@ -27,7 +27,7 @@ struct VerbItem_IT{
   QStringList similarVerbs;
   
 
-  void clear(){
+  void clear() {
     verb.clear();
 
     impersonalForms.clear();

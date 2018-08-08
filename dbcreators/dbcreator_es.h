@@ -6,8 +6,6 @@
 #include "databases/database_es.h"
 #include "verbitems/verbitem_es.h"
 
-// #include "base.h"
-
 
 class DBCreator_ES : public IDBCreator
 {
@@ -25,7 +23,7 @@ public:
 private:
   QStringList getFormsList(const QWebElement &parent);
   void nextRow(bool first = false, int col = 0);
-  // QString checkVerb(VerbItem_ES verb);
+  QString checkVerb(VerbItem_ES verb);
   
   void processImpersonalForms(const QWebElement &row);
   void processIndicative(const QWebElement &row);

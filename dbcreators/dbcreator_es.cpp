@@ -1,7 +1,6 @@
 
 #include "dbcreator_es.h"
 
-
 DBCreator_ES::DBCreator_ES(){
 
 }
@@ -69,12 +68,6 @@ void DBCreator_ES::processFile(string path){
     processImperative(row);
     
     processSimilarVerbs(htmlElement);
-    
-    // QString error = checkVerb(currentVerb);
-    // if(error.length() != 0){
-    //   error = "verb-error: " + verb + " :: " + error;
-    //   qDebug() << error;
-    // }
     
     verbsList.append(currentVerb);
   }
@@ -220,7 +213,6 @@ QStringList DBCreator_ES::getFormsList(const QWebElement& parent){
 void DBCreator_ES::nextRow(bool first, int col){
   QWebElement row, td1, td2, cell, parent;
   QWebElementCollection forms, tables;
-  // QStringList list1, list2;
   
   if(first){
     cell = globalRow.findFirst("td");
@@ -236,12 +228,6 @@ void DBCreator_ES::nextRow(bool first, int col){
   }
   row = globalRow;
 
-  // listString1.clear();
-  // listString2.clear();
-
-  // td1 = row.findFirst("td");
-  // td2 = td1.nextSibling();
-  
   list1.clear();
   list2.clear();
   
@@ -259,48 +245,15 @@ void DBCreator_ES::nextRow(bool first, int col){
     parent = table.findFirst("tr").lastChild().firstChild();
     list2 += getFormsList(parent);
   }
-  
-  // listString1 = list1.join(",");
-  // listString2 = list2.join(",");
 }
 
 // --------------------------------------------- service ---------------------------------------------
 
-// QString DBCreator_ES::checkVerb(VerbItem_ES verb){
-//   QString error = "";
+QString DBCreator_ES::checkVerb(VerbItem_ES verb){
+  QString error = "";
   
-//   if(verb.impersonalForms.count() != 3)
-//     error += " impersonalForms";
-  
-//   if(verb.presentIndicative.count() != 6)
-//     error += " presentIndicative";
-//   if(verb.preteritIndicative.count() != 6)
-//     error += " preteritIndicative";
-//   if(verb.futureIndicative.count() != 6)
-//     error += " futureIndicative";
-//   if(verb.perfectIndicative.count() != 6)
-//     error += " perfectIndicative";
-//   if(verb.pluperfectIndicative.count() != 6)
-//     error += " pluperfectIndicative";
-//   if(verb.futurePerfectIndicative.count() != 6)
-//     error += " futurePerfectIndicative";
-  
-//   if(verb.presentSubjunctive.count() != 6)
-//     error += " presentSubjunctive";
-//   if(verb.preteritSubjunctive.count() != 6)
-//     error += " preteritSubjunctive";
-//   if(verb.perfectSubjunctive.count() != 6)
-//     error += " perfectSubjunctive";
-//   if(verb.pluperfectSubjunctive.count() != 6)
-//     error += " pluperfectSubjunctive";
-  
-//   if(verb.presentConditional.count() != 6)
-//     error += " presentConditional";
-//   if(verb.perfectConditional.count() != 6)
-//     error += " perfectConditional";
-  
-//   return error;
-// }
+  return error;
+}
 
 
 // --------------------------------------------- thread ---------------------------------------------

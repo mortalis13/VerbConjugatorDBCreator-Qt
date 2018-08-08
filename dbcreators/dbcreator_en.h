@@ -8,8 +8,6 @@
 #include "databases/database_en.h"
 #include "verbitems/verbitem_en.h"
 
-// #include "base.h"
-
 
 class DBCreator_EN : public IDBCreator, QThread
 {

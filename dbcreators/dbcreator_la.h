@@ -6,8 +6,6 @@
 #include "databases/database_la.h"
 #include "verbitems/verbitem_la.h"
 
-// #include "base.h"
-
 
 class DBCreator_LA : public IDBCreator
 {

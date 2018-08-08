@@ -10,9 +10,6 @@
 #include <vector>
 #include <memory>
 
-// #include "database.h"
-// #include "base.h"
-
 #include "dbcreators/idbcreator.h"
 #include "dbcreators/dbcreator_en.h"
 #include "dbcreators/dbcreator_es.h"
@@ -39,7 +36,6 @@ public:
 
   void test();
   void runProcess(QString lang);
-//  void examineChildElements(const QWebElement &parentElement);
 
   void listVerbs(int section);
 
@@ -54,30 +50,10 @@ private:
   
   unique_ptr<IDBCreator> dbcreator;
 
-  // QWebElement globalRow;
-  // QString listString1, listString2;
-  // QStringList list1, list2;
-  
-  // Database* db;
-
-  // QList<VerbItem> verbsList;
-  // VerbItem currentVerb;
-
 private:
   void addActions();
   void addShortcuts();
   
-  // void nextRow(bool first = false, int col = 0);
-  // QStringList getFormsList(const QWebElement &parent);
-  // QString checkVerb(VerbItem verb);
-  
-  // void processImpersonalForms(const QWebElement &row);
-  // void processIndicative(const QWebElement &row);
-  // void processSubjunctive(const QWebElement &row);
-  // void processConditional(const QWebElement &row);
-  // void processImperative(const QWebElement &row);
-  // void processSimilarVerbs(const QWebElement &htmlElement);
-
 private slots:
   void bRunClick();
   void bTestClick();

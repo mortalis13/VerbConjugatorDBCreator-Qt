@@ -4,7 +4,7 @@
 Database_EN::Database_EN()
 {
   connected = createConnection();
-  if(!connected) return;
+  if (!connected) return;
 
   initDatabase();
 }
@@ -15,9 +15,9 @@ Database_EN::~Database_EN()
 }
 
 
-bool Database_EN::createDatabase(){
+bool Database_EN::createDatabase() {
   connected = createConnection();
-  if(!connected) return false;
+  if (!connected) return false;
   
   initDatabase();
   
@@ -28,8 +28,8 @@ bool Database_EN::createDatabase(){
  * Connects to the local .db file (SQLite database)
  * if no file then creates it
  */
-bool Database_EN::createConnection(){
-  if(db.isOpen()) return true;
+bool Database_EN::createConnection() {
+  if (db.isOpen()) return true;
   
   QString dbDir = "db_out/";
   QString dbName = "verbs_en";
@@ -40,26 +40,11 @@ bool Database_EN::createConnection(){
   
   
   QFile dbfile(dbName + "_1" + ".db");
-  while(dbfile.exists()){
+  if (dbfile.exists()) {
     temp = dbName + "_" + QString::number(++num);
     dbfile.setFileName(temp + ".db");
   }
   dbName = temp;
-
-
-  // QFile dbfile(dbName + ".db");
-  // while(dbfile.exists()){
-  //   temp = dbName + "_" + QString::number(++num);
-  //   dbfile.setFileName(temp + ".db");
-
-  //   // qDebug() << "trying to remove";
-  //   // bool res = dbfile.remove();
-  //   // if(res){
-  //   //   qDebug() << "removed";
-  //   // }
-  // }
-  // dbName = temp;
-
 
   qDebug() << "dbname:" << dbName;
 
@@ -68,7 +53,7 @@ bool Database_EN::createConnection(){
   
   // qDebug() << "Transactions:" << db.driver()->hasFeature(QSqlDriver::Transactions);
 
-  if( !db.open() )
+  if ( !db.open() )
   {
     qDebug() << db.lastError();
     qFatal( "Failed to connect." );
@@ -79,25 +64,22 @@ bool Database_EN::createConnection(){
   return true;
 }
 
-void Database_EN::closeConnection(){
+void Database_EN::closeConnection() {
   db.close();
 }
 
 /*
  * Creates tables in the database if they don't exist
  */
-void Database_EN::initDatabase(){
-  if(!connected) return;
+void Database_EN::initDatabase() {
+  if (!connected) return;
 
   QSqlQuery query;
-  if(!query.exec("DROP TABLE IF EXISTS verbs")){
+  if (!query.exec("DROP TABLE IF EXISTS verbs")) {
     qDebug() << "cannot delete table: " << query.lastError();
     return;
   }
 
-  // bool res = query.exec(
-  //       "CREATE TABLE IF NOT EXISTS verbs ( verb VARCHAR(200) UNIQUE PRIMARY KEY, article LONGTEXT )" );
-  
   bool res = query.exec("CREATE TABLE IF NOT EXISTS verbs ( \
           verb TEXT UNIQUE PRIMARY KEY, \
           impersonalForms TEXT, \
@@ -116,7 +98,7 @@ void Database_EN::initDatabase(){
           similarVerbs TEXT \
         )" );
 
-  if( !res ){
+  if ( !res ) {
     qDebug() << "initDatabase() error: " << query.lastError();
     return;
   }
@@ -125,15 +107,15 @@ void Database_EN::initDatabase(){
 }
 
 
-void Database_EN::insertVerbs(const QList<VerbItem_EN>& verbsList){
+void Database_EN::insertVerbs(const QList<VerbItem_EN>& verbsList) {
   if (!connected) return;
   
   db.transaction();
 
   QSqlQuery query;
-  QString table=verbs_table;
+  QString table = verbs_table;
   
-  QString sql="insert into "+table+" values( \
+  QString sql = "insert into " + table + " values( \
                 :verb, \
                 :impersonalForms, \
                 :presentIndicative, \
@@ -151,7 +133,7 @@ void Database_EN::insertVerbs(const QList<VerbItem_EN>& verbsList){
                 :similarVerbs \
               )";
     
-  foreach(VerbItem_EN item, verbsList){
+  foreach (VerbItem_EN item, verbsList) {
     query.prepare(sql);
     
     query.bindValue(":verb", item.verb);
@@ -170,7 +152,7 @@ void Database_EN::insertVerbs(const QList<VerbItem_EN>& verbsList){
     query.bindValue(":perfectConditional", item.perfectConditional.join(","));
     query.bindValue(":similarVerbs", item.similarVerbs.join(","));
     
-    if(!query.exec()){
+    if (!query.exec()) {
       qDebug() << "insertVerbs() error [" << item.verb <<  "]: " << query.lastError();
     }
   }
@@ -178,17 +160,17 @@ void Database_EN::insertVerbs(const QList<VerbItem_EN>& verbsList){
   db.commit();
 }
 
-void Database_EN::insertVerb(QString name, QString value){
+void Database_EN::insertVerb(QString name, QString value) {
   if (!connected) return;
 
   QSqlQuery query;
-  QString table=verbs_table;
-  QString sql="insert into "+table+" (verb,article) values(:verb, :article)";
+  QString table = verbs_table;
+  QString sql = "insert into " + table + " (verb,article) values(:verb, :article)";
 
   query.prepare(sql);
   query.bindValue(":verb", name);
   query.bindValue(":article", value);
 
-  if( !query.exec() )
+  if ( !query.exec() )
     qDebug() << "insertVerb() error: " << query.lastError();
 }

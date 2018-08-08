@@ -2,12 +2,12 @@
 #include "dbcreator_fr.h"
 
 
-DBCreator_FR::DBCreator_FR(){
+DBCreator_FR::DBCreator_FR() {
 
 }
 
 
-QStringList DBCreator_FR::getFilesInFolder(string path){
+QStringList DBCreator_FR::getFilesInFolder(string path) {
   QString dir = QString::fromStdString(path);
   
   QDir qdir(dir);
@@ -21,14 +21,14 @@ QStringList DBCreator_FR::getFilesInFolder(string path){
   return qdir.entryList();
 }
 
-void DBCreator_FR::processFile(string path){
+void DBCreator_FR::processFile(string path) {
   Database_FR* db = new Database_FR();
   verbsList.clear();
   
   qDebug() << "Reading file:" << QString(path.c_str());
   
   fstream textFile(path.c_str(), ios::in);
-  if(!textFile.is_open()){
+  if (!textFile.is_open()) {
     qDebug() << "FR :: cannot open file:" << QString(path.c_str()) << strerror(errno);
     return;
   }
@@ -36,9 +36,9 @@ void DBCreator_FR::processFile(string path){
   string str;
   int count = 0;
 
-  while(textFile){
+  while (textFile) {
     getline(textFile, str);
-    if(!textFile) break;
+    if (!textFile) break;
 
     currentVerb.clear();
 
@@ -47,7 +47,6 @@ void DBCreator_FR::processFile(string path){
     QString verb = QString::fromUtf8(cverb.c_str());
 
     currentVerb.verb = verb;
-    
 
     QWebPage webPage;
     QWebFrame* frame = webPage.mainFrame();
@@ -72,13 +71,6 @@ void DBCreator_FR::processFile(string path){
     
     processSimilarVerbs(htmlElement);
     
-    
-    // QString error = checkVerb(currentVerb);
-    // if(error.length() != 0){
-    //   error = "verb-error: " + verb + " :: " + error;
-    //   qDebug() << error;
-    // }
-    
     verbsList.append(currentVerb);
   }
   
@@ -91,17 +83,17 @@ void DBCreator_FR::processFile(string path){
   qDebug();
 }
 
-void DBCreator_FR::runProcess(string path, bool useFolder, int startNum){
-  if(useFolder){
+void DBCreator_FR::runProcess(string path, bool useFolder, int startNum) {
+  if (useFolder) {
     QStringList filesList = getFilesInFolder(path);
 
-    foreach(QString item, filesList){
+    foreach (QString item, filesList) {
       QDir dir(QString(path.c_str()));
       string itemS = (dir.absolutePath() + "/" + item).toStdString();
       processFile(itemS);
     }
   }
-  else{
+  else {
     processFile(path);
   }
   
@@ -111,13 +103,13 @@ void DBCreator_FR::runProcess(string path, bool useFolder, int startNum){
 
 // --------------------------------------------- forms ---------------------------------------------
 
-void DBCreator_FR::processImpersonalForms(const QWebElement& row){
+void DBCreator_FR::processImpersonalForms(const QWebElement& row) {
   QWebElement parent = row.findFirst("td").firstChild();              // <td><p>
   currentVerb.impersonalForms = getFormsList(parent);
 }
 
 
-void DBCreator_FR::processIndicative(const QWebElement& row){
+void DBCreator_FR::processIndicative(const QWebElement& row) {
   globalRow = row;
 
   nextRow(true);
@@ -138,7 +130,7 @@ void DBCreator_FR::processIndicative(const QWebElement& row){
 }
 
 
-void DBCreator_FR::processSubjunctive(const QWebElement &row){
+void DBCreator_FR::processSubjunctive(const QWebElement &row) {
   globalRow = row;
 
   nextRow(true, 1);
@@ -151,7 +143,7 @@ void DBCreator_FR::processSubjunctive(const QWebElement &row){
 }
 
 
-void DBCreator_FR::processConditional(const QWebElement &row){
+void DBCreator_FR::processConditional(const QWebElement &row) {
   globalRow = row;
 
   nextRow(true);
@@ -159,15 +151,15 @@ void DBCreator_FR::processConditional(const QWebElement &row){
   currentVerb.pastConditional = list2;
 }
 
-void DBCreator_FR::processImperative(const QWebElement &row){
+void DBCreator_FR::processImperative(const QWebElement &row) {
   QWebElement inrow, td, parent;
   
   inrow = row.findFirst("td").findFirst("table").findFirst("tr");
   parent = inrow.lastChild().firstChild();
   
   QStringList tempList = getFormsList(parent);
-  for(int i=0; i<tempList.size(); ++i){
-    if(tempList.at(i).length() == 0){
+  for (int i = 0; i<tempList.size(); ++i) {
+    if (tempList.at(i).length() == 0) {
       tempList.removeAt(i);
     }
   }
@@ -176,34 +168,34 @@ void DBCreator_FR::processImperative(const QWebElement &row){
 }
 
 
-void DBCreator_FR::processSimilarVerbs(const QWebElement &htmlElement){
+void DBCreator_FR::processSimilarVerbs(const QWebElement &htmlElement) {
   // currentVerb.similarVerbs = "";
 }
 
 
 // ---------------------------------------------  ---------------------------------------------
 
-QStringList DBCreator_FR::getFormsList(const QWebElement& parent){
+QStringList DBCreator_FR::getFormsList(const QWebElement& parent) {
   QString text = "";
   QStringList list;
   
   QWebElement node = parent.firstChild();
   
-  while(!node.isNull()){
+  while (!node.isNull()) {
     QString tag = node.tagName();
-    if(tag == "SPAN"){
-      if(text.length() != 0)
+    if (tag == "SPAN") {
+      if (text.length() != 0)
         text += "; ";
       text += node.toPlainText().trimmed();
     }
-    else if(tag == "BR" && text.length() != 0){
+    else if (tag == "BR" && text.length() != 0) {
       list.append(text);
       text.clear();
     }
     node = node.nextSibling();
   }
 
-  if(text.length() != 0){
+  if (text.length() != 0) {
     list.append(text);
     text.clear();
   }
@@ -212,31 +204,24 @@ QStringList DBCreator_FR::getFormsList(const QWebElement& parent){
 }
 
 
-void DBCreator_FR::nextRow(bool first, int col){
+void DBCreator_FR::nextRow(bool first, int col) {
   QWebElement row, td1, td2, cell, parent;
   QWebElementCollection forms, tables;
-  // QStringList list1, list2;
   
-  if(first){
+  if (first) {
     cell = globalRow.findFirst("td");
-    if(col != 0){
-      for(int i=0; i<col; ++i){
+    if (col != 0) {
+      for (int i = 0; i<col; ++i) {
         cell = cell.nextSibling();
       }
     }
     globalRow = cell.findFirst("table").findFirst("tr");
   }
-  else{
+  else {
     globalRow = globalRow.nextSibling();
   }
   row = globalRow;
 
-  // listString1.clear();
-  // listString2.clear();
-
-  // td1 = row.findFirst("td");
-  // td2 = td1.nextSibling();
-  
   list1.clear();
   list2.clear();
   
@@ -244,78 +229,45 @@ void DBCreator_FR::nextRow(bool first, int col){
   td2 = row.lastChild();
   
   tables = td1.findAll("table");
-  foreach (QWebElement table, tables){
+  foreach (QWebElement table, tables) {
     parent = table.findFirst("tr").lastChild().firstChild();
     list1 += getFormsList(parent);
   }
   
   tables = td2.findAll("table");
-  foreach (QWebElement table, tables){
+  foreach (QWebElement table, tables) {
     parent = table.findFirst("tr").lastChild().firstChild();
     list2 += getFormsList(parent);
   }
-  
-  // listString1 = list1.join(",");
-  // listString2 = list2.join(",");
 }
 
 // --------------------------------------------- service ---------------------------------------------
 
-// QString DBCreator_FR::checkVerb(VerbItem_FR verb){
-//   QString error = "";
+QString DBCreator_FR::checkVerb(VerbItem_FR verb) {
+  QString error = "";
   
-//   if(verb.impersonalForms.count() != 3)
-//     error += " impersonalForms";
-  
-//   if(verb.presentIndicative.count() != 6)
-//     error += " presentIndicative";
-//   if(verb.preteritIndicative.count() != 6)
-//     error += " preteritIndicative";
-//   if(verb.futureIndicative.count() != 6)
-//     error += " futureIndicative";
-//   if(verb.perfectIndicative.count() != 6)
-//     error += " perfectIndicative";
-//   if(verb.pluperfectIndicative.count() != 6)
-//     error += " pluperfectIndicative";
-//   if(verb.futurePerfectIndicative.count() != 6)
-//     error += " futurePerfectIndicative";
-  
-//   if(verb.presentSubjunctive.count() != 6)
-//     error += " presentSubjunctive";
-//   if(verb.preteritSubjunctive.count() != 6)
-//     error += " preteritSubjunctive";
-//   if(verb.perfectSubjunctive.count() != 6)
-//     error += " perfectSubjunctive";
-//   if(verb.pluperfectSubjunctive.count() != 6)
-//     error += " pluperfectSubjunctive";
-  
-//   if(verb.presentConditional.count() != 6)
-//     error += " presentConditional";
-//   if(verb.perfectConditional.count() != 6)
-//     error += " perfectConditional";
-  
-//   return error;
-// }
+  return error;
+}
 
 
 // --------------------------------------------- thread ---------------------------------------------
 
-void DBCreator_FR::run(){
-  if(useFolder){
+void DBCreator_FR::run() {
+  if (useFolder) {
     QStringList filesList = getFilesInFolder(scanPath);
 
-    foreach(QString item, filesList){
+    foreach (QString item, filesList) {
       QDir dir(QString(scanPath.c_str()));
       string itemS = (dir.absolutePath() + "/" + item).toStdString();
       processFile(itemS);
     }
   }
-  else{
+  else {
     processFile(scanPath);
   }
 }
 
-void DBCreator_FR::done(){
+void DBCreator_FR::done() {
   qDebug() << "done";
 }
 

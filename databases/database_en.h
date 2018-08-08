@@ -33,7 +33,6 @@ private:
   QString sql;
     
   QSqlDatabase db;  
-//  QSqlQuery query;
   
   bool createConnection();
   void initDatabase();
